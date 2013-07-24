@@ -2,18 +2,18 @@ package example
 
 object Bench extends BenchSuite(ichi.bench.Thyme.warmed(verbose = print)) with RangeTest {
   def run {
-    def report(name: String, result: Any): Unit =
-      println(name, result)
+    def report(test: String, c1: String, c2: String, result: (Any, Any)): Unit =
+      println(s"Test: $test\nFirst: '$c1' Second: '$c2'\n\n${result._2}\n\n")
 
-    report("up: paulp vs. old", th.benchOffPairWarm()(paulpUp)(up))
-    report("up: paulp vs. while", th.benchOffPairWarm()(paulpUp)(whileLoopUp))
-    report("up: old vs. while", th.benchOffPairWarm()(up)(whileLoopUp))
-    report("up: sum vs. while", th.benchOffPairWarm()(sum)(whileLoopUp))
-    report("up: paulp sum vs. while", th.benchOffPairWarm()(sumPaulp)(whileLoopUp))
+    report("up", "paulp", "old", th.benchOffPairWarm()(paulpUp)(up))
+    report("up", "paulp", "while", th.benchOffPairWarm()(paulpUp)(whileLoopUp))
+    report("up", "old", "while", th.benchOffPairWarm()(up)(whileLoopUp))
+    report("up", "sum", "while", th.benchOffPairWarm()(sum)(whileLoopUp))
+    report("up", "paulp sum", "while", th.benchOffPairWarm()(sumPaulp)(whileLoopUp))
 
-    report("up nested: old vs. while", th.benchOffPairWarm()(upNested)(whileLoopUpNested))
-    report("up nested: paulp vs. while", th.benchOffPairWarm()(paulpUpNested)(whileLoopUpNested))
-    report("up nested: sum vs. while", th.benchOffPairWarm()(sumNested)(whileLoopUpNested))
+    report("up nested", "old", "while", th.benchOffPairWarm()(upNested)(whileLoopUpNested))
+    report("up nested", "paulp", "while", th.benchOffPairWarm()(paulpUpNested)(whileLoopUpNested))
+    report("up nested", "sum", "while", th.benchOffPairWarm()(sumNested)(whileLoopUpNested))
   }
 }
 
