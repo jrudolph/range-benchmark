@@ -7,3 +7,5 @@ scalaVersion := "2.10.2"
 ScalariformSupport.formatSettings
 
 Revolver.settings
+
+fork in run := true
